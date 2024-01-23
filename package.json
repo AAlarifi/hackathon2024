@@ -1,0 +1,17 @@
+{
+  "name": "hackathon2024",
+  "version": "1.0.0",
+  "description": "| Main features | Minor features | Accessability features |\r | :-----------: | :------------: | :------------: |\r | Food type sorting. | Cooking tips and tutorials | Speech to text to speech. |\r | Ingredients API  | Real-time price alerts for users when their saved ingredients are on sale. | Colour-blind mode. |\r | Shopping list | Community form | Keyboard assisted navigation |\r | Emergency Food Resources: Provide information on local food banks, emergency food assistance programs, and other resources for those in immediate need | Budget planning tools | Search by image (AI/API) |\r | Similiar recipe recommendation system |  Swap ingredients with alternatives | Multilingual Support |\r | Nutritional information displayed | Grocery list generator with price comparison from different stores. | Voice-guided recipe instructions for an immersive cooking experience. |\r | Emergency food resources (Food Banks) | Quick access to user-generated budget-friendly recipe collections. | Integration with screen magnifiers for users with low vision.| \r | Meal plans (ready family meal plans with the shopping list) | Recipe recommending system. | Rating system (0 to 5 stars) and feedback input system   |\r |  Ingredients can be added to the shopping list | Ingredients API with budget options - premium options. | Database for storing saved recipes |\r | Dietician or Nutritionist Q&A: Provide expert advice on nutrition and healthy eating within a budget | \"Smart Cart\" feature suggesting budget-friendly substitutes during shopping. | Recommendations for easy to hard recipe methods  |\r |  | Customize recommendations based on dietary preferences and allergens. | Screen reader compatibility, Speech-to-text functionality   |\r |  | Integration with local grocery store APIs for real-time pricing. | Keyboard shortcuts, Navigable with keyboard |\r |  | Seasonal ingredient recommendations for optimal freshness and affordability. |   |\r |  | User-generated content: Budget-friendly recipe contests and community ratings. | Multilingual support, Language selection menu |\r |  | Option to set budget constraints and receive tailored recipe suggestions. | Text-to-speech functionality, Read-aloud option|\r | | Customizable shopping list preferences based on budget and dietary restrictions. | Customizable keyboard shortcuts |\r |  | Integration with discount/coupon platforms for ingredient-specific deals. | Offline mode, Access to previously viewed content without internet |\r |  | \"Frugal Chef\" badge for users who consistently share budget-friendly recipes. | Braille-compatible recipes, Downloadable Braille versions |\r |  | Integration with local farmers' markets for fresh and affordable produce. | Readable font choices, Customizable font size and style  |\r |  | Interactive cost breakdown charts for each recipe. | Audio descriptions for images, Descriptive audio for visual content |\r |  |  | Collapsible and expandable sections, Reduced cognitive load |\r | | Save to favourites | Image enlargement |\r | | Recipe scaler | Translated website |\r |  | Metrics converter | Text resizing |\r |  | Ratings/comments | Image enlargement |\r |  | ||",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "main": "node ./src/firebase/init.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "firebase": "^10.7.2",
+    "vue": "^3.4.15"
+  }
+}
