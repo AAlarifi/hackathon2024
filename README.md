@@ -2,16 +2,16 @@
 
 | Main features | Minor features | Accessability features |
 | :-----------: | :------------: | :------------: |
-| Food type sorting. |  | Speech to text to speech. |
-| Ingredients API  |  | Colour-blind mode. |
-| Shopping list |  | Keyboard assisted navigation |
-| Emergency Food Resources: Provide information on local food banks, emergency food assistance programs, and other resources for those in immediate need |  | Search by image (AI/API) |
-| Similiar recipe recommendation system |  | Multilingual Support |
+| Food type sorting. | Cooking tips and tutorials | Speech to text to speech. |
+| Ingredients API  | Real-time price alerts for users when their saved ingredients are on sale. | Colour-blind mode. |
+| Shopping list | Community form | Keyboard assisted navigation |
+| Emergency Food Resources: Provide information on local food banks, emergency food assistance programs, and other resources for those in immediate need | Budget planning tools | Search by image (AI/API) |
+| Similiar recipe recommendation system |  Swap ingredients with alternatives | Multilingual Support |
 | Nutritional information displayed | Grocery list generator with price comparison from different stores. | Voice-guided recipe instructions for an immersive cooking experience. |
 | Emergency food resources (Food Banks) | Quick access to user-generated budget-friendly recipe collections. | Integration with screen magnifiers for users with low vision.| 
 | Meal plans (ready family meal plans with the shopping list) | Recipe recommending system. | Rating system (0 to 5 stars) and feedback input system   |
 |  Ingredients can be added to the shopping list | Ingredients API with budget options - premium options. | Database for storing saved recipes |
-| Dietician or Nutritionist Q&A: Provide expert advice on nutrition and healthy eating within a budget | "Smart Cart" feature suggesting budget-friendly substitutes during shopping. | Recommendations for easy to hard recipe methods                  |
+| Dietician or Nutritionist Q&A: Provide expert advice on nutrition and healthy eating within a budget | "Smart Cart" feature suggesting budget-friendly substitutes during shopping. | Recommendations for easy to hard recipe methods  |
 |  | Customize recommendations based on dietary preferences and allergens. | Screen reader compatibility, Speech-to-text functionality   |
 |  | Integration with local grocery store APIs for real-time pricing. | Keyboard shortcuts, Navigable with keyboard |
 |  | Seasonal ingredient recommendations for optimal freshness and affordability. |   |
@@ -22,17 +22,12 @@
 |  | "Frugal Chef" badge for users who consistently share budget-friendly recipes. | Braille-compatible recipes, Downloadable Braille versions |
 |  | Integration with local farmers' markets for fresh and affordable produce. | Readable font choices, Customizable font size and style  |
 |  | Interactive cost breakdown charts for each recipe. | Audio descriptions for images, Descriptive audio for visual content |
-|  | Real-time price alerts for users when their saved ingredients are on sale. | Collapsible and expandable sections, Reduced cognitive load |
+|  |  | Collapsible and expandable sections, Reduced cognitive load |
 | | Save to favourites | Image enlargement |
 | | Recipe scaler | Translated website |
 |  | Metrics converter | Text resizing |
 |  | Ratings/comments | Image enlargement |
-|  | Swap ingredients with alternatives ||
-| | Budget planning tools ||
-|  | Cooking tips and tutorials ||
-| | Community form ||
-|  | Educational Content on Healthy Eating: Articles and infographics on nutrition, budgeting for food, and the importance of a balanced diet | |
-| | | |
+|  | ||
 
 •	Search for recipes based on:
 o	Ingredients they like
