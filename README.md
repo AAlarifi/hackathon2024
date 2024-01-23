@@ -23,3 +23,37 @@
 | Font-changing menu                                                         | Integration with local farmers' markets for fresh and affordable produce. | Readable font choices, Customizable font size and style          |
 | Audio descriptions for images                                               | Interactive cost breakdown charts for each recipe.          | Audio descriptions for images, Descriptive audio for visual content |
 | Expandable and collapsible menu sections (ingredients, method, etc.)        | Real-time price alerts for users when their saved ingredients are on sale. | Collapsible and expandable sections, Reduced cognitive load       |
+| Meal plans (ready family meal plans with the shopping list) | Save to favourites | |
+| Add ingredients to shopping list | Recipe scaler ||
+| Premium feature – plan your whole diet based on calories or overall good for health | Metrics converter | |
+| Search for recipes based on ingredients you got in the fridge | Ratings/comments ||
+| Similar recipes | Swap ingredients with alternatives ||
+| Nutritional information | Budget planning tools ||
+| Emergency Food Resources: Provide information on local food banks, emergency food assistance programs, and other resources for those in immediate need. | Cooking tips and tutorials ||
+| Kid-Friendly Recipe Section: Recipes that are both child-friendly in taste and easy for kids to help prepare | Community form ||
+| Dietician or Nutritionist Q&A: Provide expert advice on nutrition and healthy eating within a budget | Educational Content on Healthy Eating: Articles and infographics on nutrition, budgeting for food, and the importance of a balanced diet ||
+| Premium feature – textbox allowing user to explain their current situation (e.g. budget, what they like, how many people, what’s important for them in those recipes, etc) and get custom made recipes for them [give them some templates to start with] |||
+
+•	Search for recipes based on:
+o	Ingredients they like
+o	Ingredients they don’t like
+o	Budget (max cost per meal)
+o	Cooking/preparing time
+o	Hallah
+o	Vegetarian
+o	Vegan
+o	Gluten-free
+o	Protein, Carbs, fats
+o	Calories
+o	Ratings
+o	Difficulty
+o	Dairy-free
+o	Freezable
+o	Batch cooking recipes
+o	Tags (air fryer recipes, noodles, desserts etc)
+o	kitchen amenities
+o	Sort:
+	Lowest price
+	Least ingredients
+	Protein, Carbs, fats
+	Calories
