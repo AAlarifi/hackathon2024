@@ -6,4 +6,4 @@
 | Ingredients API (budget options - premium options).  | **?** | Colour blind mode. |
 | **?** | **?** | Keyboard assisted navigation |
 | **?** | **?** | Search by image (AI/API) |
-| Copy me | Copy me | Copy me |
+| Allergen system | Copy me | Multilingual Support |
