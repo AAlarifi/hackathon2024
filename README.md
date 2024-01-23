@@ -8,5 +8,4 @@
 | Add video for making food  | **?** | Search by image (AI/API) |
 | Allergen system | Copy me | Multilingual Support |
 | Recipe customization based on dietary preferences and allergens. | Grocery list generator with price comparison from different stores. | Voice-guided recipe instructions for an immersive cooking experience. |
-| Interactive cost breakdown charts for each recipe. | Quick access to user-generated budget-friendly recipe collections. | Integration with screen magnifiers for users with low vision.
-| 
+| Interactive cost breakdown charts for each recipe. | Quick access to user-generated budget-friendly recipe collections. | Integration with screen magnifiers for users with low vision. | 
