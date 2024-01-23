@@ -5,5 +5,5 @@
 | Recipe recommending system. | **?** | Speech to text to speech. |
 | Ingredients API (budget options - premium options).  | **?** | Colour blind mode. |
 | **?** | **?** | Keyboard assisted navigation |
-| **?** | **?** | Search by image (AI/API) |
+| Add video for making food  | **?** | Search by image (AI/API) |
 | Allergen system | Copy me | Multilingual Support |
