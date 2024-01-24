@@ -1,8 +1,12 @@
 <template>
-  <div></div>
+  <div>
+    <NavBar/>
+  </div>
 </template>
 
 <script>
+import NavBar from "./layouts/NavigationBar.vue"
+
 // the relevant methods
 import { collection, addDoc } from "firebase/firestore"
 // the firestore instance
@@ -29,6 +33,9 @@ export default {
       // access auto-generated ID with '.id'
       console.log('Document was created with ID:', docRef.id)
     }
+  },
+  components: {
+    NavBar
   }
 }
 </script>
