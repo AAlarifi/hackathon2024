@@ -10,6 +10,7 @@
 <script>
 import { createRouter, createWebHistory } from 'vue-router';
 import router from "./router/index.js";
+// require('dotenv').config();
 
 export default {
   mounted() {
