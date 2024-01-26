@@ -1,24 +1,25 @@
 <template>
   
+  
+   <div>
+
+    <NavBar/>
+  </div>
   <RouterView/>
-  <router-link to="/">Home</router-link>
-    <router-link to="/about">About</router-link>
-    <router-link to="/darkmode">darkmode</router-link>
     <!-- <router-link to="/translate">translate page</router-link> -->
 </template>
 
 <script>
 import { createRouter, createWebHistory } from 'vue-router';
+import NavBar from "./layouts/NavigationBar.vue"
 import router from "./router/index.js";
 // require('dotenv').config();
 
 export default {
-  mounted() {
-    this.$router = createRouter({
-      history: createWebHistory(),
-      routes: []
-    })
-  }
+  
+  components:{
+        NavBar
+      }
 }
 
 // import NavBar from "./layouts/NavigationBar.vue"
@@ -54,4 +55,5 @@ export default {
 //     NavBar
 //   }
 // }
+
 </script>

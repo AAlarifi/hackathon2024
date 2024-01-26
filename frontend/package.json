@@ -12,11 +12,15 @@
     "deepl-node": "^1.11.0",
     "firebase": "^10.7.2",
     "node": "^21.6.1",
+    "sass": "^1.70.0",
     "vue": "^3.4.15",
     "vue-router": "^4.2.5"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.5.2",
+    "autoprefixer": "^10.4.17",
+    "postcss": "^8.4.33",
+    "tailwindcss": "^3.4.1",
     "vite": "^5.0.12"
   }
 }
