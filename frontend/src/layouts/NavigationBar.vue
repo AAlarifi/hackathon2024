@@ -14,7 +14,7 @@
         >
           <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
         </svg>
-        <span class="ml-3 text-3xl">Tailblocks</span>
+        <span class="ml-3 text-3xl">Budgeats</span>
       </a>
       <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-xl justify-center space-x-6">
         <div
@@ -75,7 +75,7 @@
 export default {
   data() {
     return {
-      navLinks: ["First Link", "Second Link", "Third Link", "Fourth Link"],
+      navLinks: ["Home", "Recipies", "About us", "Emergency"],
       isDropdownOpen: null,
       isProfileDropdownOpen: false,
     };

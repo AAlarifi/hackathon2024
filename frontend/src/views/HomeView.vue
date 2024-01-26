@@ -9,7 +9,7 @@
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
           </svg>
         </div>
-        <input type="search" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Mockups, Logos..." required>
+        <input type="search" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Mockups, Logos...">
         <button type="submit" class="text-black absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
       </div>
         <img v-for="(image, index) in images" :key="index" :src="image" alt="Recipe Image">
@@ -216,7 +216,7 @@ export default {
       this.allergens.forEach(e => {
         all.push(e)
       })
-      console.log(all)
+      //console.log(all)
     all.forEach(a=>{
       this.addCondition(this.conditions, 'allergens.' + a, '==', false)
     })
@@ -225,7 +225,7 @@ export default {
         all1.push(e)
         
       })
-      console.log(all1)
+      //console.log(all1)
 
     all1.forEach(a=>{
       this.addCondition(this.conditions, 'amenities.' + a, '==', false)
@@ -244,15 +244,32 @@ export default {
       // const q = await getDocs(colRef);
       q.forEach(element => {
         // console.log(element.data());
-        //console.log(element.data())
+        // console.log(element.data())
       });
 
       console.log("After filtering")
+      let afterFilter = []
 
-      const afterFilter = this.filterNumber("servingSize", 1, true)
+      // if(this.budget > 0) {
+      //   afterFilter = this.filterNumber("totalPrice", this.budget, false)
+      //   // afterFilter.forEach(af => {
+      //   //   //console.log(af.data())
+      //   // })
+      // }
+
+      if(this.budget>0){
+      afterFilter = this.filterNumber("totalPrice", this.budget, false)
       afterFilter.forEach(af => {
         console.log(af.data())
       })
+    } else {
+      q.forEach(element => {
+        // console.log(element.data());
+        console.log(element.data())
+      });
+    }
+
+      
       
     }
      }
