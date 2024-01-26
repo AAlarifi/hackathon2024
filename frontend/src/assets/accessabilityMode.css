@@ -67,3 +67,13 @@ body.color-blind-mode a
     color: #000;
     /* Dark color for headings in color-blind mode */
 }
+
+/* fonts.css */
+.Arial {
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .SansSerif {
+    font-family: 'sans-serif';
+  }
+  
