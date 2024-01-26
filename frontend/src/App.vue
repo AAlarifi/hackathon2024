@@ -4,6 +4,8 @@
    <div>
 
     <NavBar/>
+    <DarkMode/>
+
   </div>
   <RouterView/>
     <!-- <router-link to="/translate">translate page</router-link> -->
@@ -12,13 +14,15 @@
 <script>
 import { createRouter, createWebHistory } from 'vue-router';
 import NavBar from "./layouts/NavigationBar.vue"
+import DarkMode from "./views/DarkMode.vue"
 import router from "./router/index.js";
 // require('dotenv').config();
 
 export default {
   
   components:{
-        NavBar
+        NavBar,
+        DarkMode
       }
 }
 

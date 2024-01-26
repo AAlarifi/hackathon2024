@@ -1,12 +1,8 @@
 <template>
-  <div :style="{ fontFamily: fontFamily }">
-    <button @click="toggleDarkMode">Toggle Dark Mode</button>
-    <button @click="toggleColourBlindMode">Toggle Color Blind Mode</button>
-    <button @click="toggleFontStyle">Toggle Font</button>
-    <h1>H1</h1>
-    <h2>H2</h2>
-    <h3>H3</h3>
-    <p>this is smaple text.</p>
+  <div :style="{ fontFamily: fontFamily }" class="flex flex-col items-center justify-center ">
+    <button @click="toggleDarkMode" class="border mb-2 ">Toggle Dark Mode</button>
+    <button @click="toggleColourBlindMode" class="border mb-2">Toggle Color Blind Mode</button>
+    <button @click="toggleFontStyle" class="border mb-2">Toggle Font</button>
   </div>
 </template>
 
@@ -50,4 +46,7 @@ export default {
 
 <style>
 @import '../assets/accessabilityMode.css';
+.text{
+  color:white
+}
 </style>
