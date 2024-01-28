@@ -22,107 +22,75 @@
       <!-- Filter Options -->
       <div class="mt-8">
         <div>
-
-          <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Filter by Allergen</label>
-          <div class="flex space-x-4">
-
-
-            <label for="category1" class="text-sm text-gray-900 dark:text-black">Peanuts</label>
-            <input type="checkbox" value="peanuts" class="text-blue-500 form-radio" v-model="allergens">
-
-
-            <label for="category2" class="text-sm text-gray-900 dark:text-black">Fish</label>
-            <input type="checkbox" value="fish" class="text-blue-500 form-radio" v-model="allergens">
-
-            <label for="category3" class="text-sm text-gray-900 dark:text-black">Milk</label>
-            <input type="checkbox" value="milk" class="text-blue-500 form-radio" v-model="allergens">
-
-
-            <label for="category4" class="text-sm text-gray-900 dark:text-black">Soy</label>
-            <input type="checkbox" value="soy" class="text-blue-500 form-radio" v-model="allergens">
-
-            <label for="category5" class="text-sm text-gray-900 dark:text-black">Wheat</label>
-            <input type="checkbox" value="wheat" class="text-blue-500 form-radio" v-model="allergens">
-
-
-            <label for="category6" class="text-sm text-gray-900 dark:text-black">Sesame</label>
-            <input type="checkbox" value="sesame" class="text-blue-500 form-radio" v-model="allergens">
-
-            <label for="category7" class="text-sm text-gray-900 dark:text-black">Mustard</label>
-            <input type="checkbox" id="category1" name="category" class="text-blue-500 form-radio" v-model="allergens">
-
-
-          </div>
+          <checkboxes ref="allergensComponent" category="Allergens" :categoryElements="['peanuts', 'fish', 'milk', 'soy', 'wheat', 'sesame', 'mustard', 'eggs']" @getSelectedElements="addSelectedElementsToEqualsCondition('allergens', $event, false)"/>
         </div>
 
-        <div class="p-2">
-          <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Filter by Ammenities</label>
+        <div>
+          <checkboxes ref="amenitiesComponent" category="Amenities" :categoryElements="['oven', 'pan', 'pot', 'bowl', 'blender']" @getSelectedElements="addSelectedElementsToEqualsCondition('amenities', $event, false)"/>
+        </div>
+
+        <div>
+          <checkboxes ref="dietsComponent" category="Diets" :categoryElements="['vegan', 'vegetarian', 'keto', 'gluten-free', 'pescatarian', 'halal']" @getSelectedElements="addSelectedElementsToArrayContainsAnyCondition('diets', $event)"/>
+        </div>
+
+        <div>
+          <checkboxes ref="cuisinesComponent" category="Cuisines" :categoryElements="['Italian', 'Chinese', 'Indian', 'French', 'Mexican', 'Japanese', 'Thai', 'Spanish', 'Greek']"/> <!-- @getSelectedElements="addSelectedElementsToEqualsCondition('cuisine', $event, '==')" -->
+        </div>
+
+        <div>
+          <checkboxes ref="difficultyComponent" category="Difficuly" :categoryElements="['easy', 'medium', 'hard']" @getSelectedElements="addSelectedElementsToInCondition('difficulty', $event)"/>
+        </div>
+
+        <div>
+          <label for="kidsFriendly">Kids friendly:</label>
+          <select name="kidsFriendly" id="kidsFriendly" v-model="filterValues.kidsFriendly">
+            <option value="">N/A</option>
+            <option :value="true">Yes</option>
+            <option :value="false">No</option>
+          </select>
+        </div>
+
+        <div>
+          <checkboxes ref="servingSizeComponent" category="Serving Size" :categoryElements="[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]" @getSelectedElements="addSelectedElementsToInCondition('servingSize', $event)"/>
+        </div>
+
+        <div>
+          <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Filter by Total Time</label>
           <div class="flex space-x-4">
-
-            <label for="1" class="text-sm text-gray-900 dark:text-black">Oven</label>
-            <input type="checkbox" value="oven" class="text-blue-500 form-radio" v-model="amenities">
-
-            <label for="2" class="text-sm text-gray-900 dark:text-black">Pan</label>
-            <input type="checkbox" value="pan" class="text-blue-500 form-radio" v-model="amenities">
-
-            <label for="3" class="text-sm text-gray-900 dark:text-black">Pot</label>
-            <input type="checkbox" value="pot" class="text-blue-500 form-radio" v-model="amenities">
-
-            <label for="4" class="text-sm text-gray-900 dark:text-black">Bowl</label>
-            <input type="checkbox" value="bowl" class="text-blue-500 form-radio" v-model="amenities">
-
-            <label for="5" class="text-sm text-gray-900 dark:text-black">Blender</label>
-            <input type="checkbox" value="blender" class="text-blue-500 form-radio" v-model="amenities">
-
-
-
-
+            <template v-for="totalTime in [{'label': 'Short(<30mins)', 'value': 30}, {'label': 'Medium(<1h15mins)', 'value': 75}, {'label': 'Long(<2h)', 'value': 120}, {'label': 'Extra Long(>2h)', 'value': 121}]">
+              <label :for="`category${totalTime.label}`" class="text-sm text-gray-900 dark:text-black">{{ totalTime.label }}</label>
+              <input type="checkbox" :value="totalTime.value" class="text-blue-500 form-radio" v-model="totalTimes">
+            </template>
           </div>
         </div>
 
         <div>
-          <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Filter by Cuisines</label>
-          <div class="flex space-x-4">
-
-            <label for="category1" class="text-sm text-gray-900 dark:text-black">Italian</label>
-            <input type="checkbox" value="Italian" class="text-blue-500 form-radio" v-model="cuisines">
-
-            <label for="category2" class="text-sm text-gray-900 dark:text-black">Chinese</label>
-            <input type="checkbox" value="Chinese" class="text-blue-500 form-radio" v-model="cuisines">
-
-            <label for="category3" class="text-sm text-gray-900 dark:text-black">Indian</label>
-            <input type="checkbox" value="Indian" class="text-blue-500 form-radio" v-model="cuisines">
-
-            <label for="category4" class="text-sm text-gray-900 dark:text-black">French</label>
-            <input type="checkbox" value="French" class="text-blue-500 form-radio" v-model="cuisines">
-
-            <label for="category5" class="text-sm text-gray-900 dark:text-black">Mexican</label>
-            <input type="checkbox" value="Mexican" class="text-blue-500 form-radio" v-model="cuisines">
-
-            <label for="category6" class="text-sm text-gray-900 dark:text-black">Japanese</label>
-            <input type="checkbox" value="Japanese" class="text-blue-500 form-radio" v-model="cuisines">
-
-            <label for="category7" class="text-sm text-gray-900 dark:text-black">Thai</label>
-            <input type="checkbox" value="Thai" class="text-blue-500 form-radio" v-model="cuisines">
-
-            <label for="category8" class="text-sm text-gray-900 dark:text-black">Spanish</label>
-            <input type="checkbox" value="Spanish" class="text-blue-500 form-radio" v-model="cuisines">
-
-            <label for="category9" class="text-sm text-gray-900 dark:text-black">Greek</label>
-            <input type="checkbox" value="Greek" class="text-blue-500 form-radio" v-model="cuisines">
-
-
-          </div>
+          <label for="points">Total Time</label>
+          <input type="range" id="points" name="points" min="0" max="600">
         </div>
 
         <div>
-          <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Filter by Category</label>
+          <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Filter by Pricing</label>
           <div class="flex space-x-4">
 
             <label for="category1" class="text-sm text-gray-900 dark:text-black">Maximum Budget</label>
             <input type="number" class="text-blue-500 form-radio" v-model="numericFields.maxBudget" @input="validateNumericField('maxBudget')">
 
             <label for="category1" class="text-sm text-gray-900 dark:text-black">Maximum Price per Serving</label>
+            <input type="number" class="text-blue-500 form-radio" v-model="numericFields.maxServingPrice" @input="validateNumericField('maxServingPrice')">
+
+          </div>
+        </div>
+
+        <div>
+          <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Filter by Nutrition</label>
+          <div class="flex space-x-4">
+
+            <!-- Change the v-model and validate numeric field -->
+            <label for="category1" class="text-sm text-gray-900 dark:text-black">Minimum Protein</label>
+            <input type="number" class="text-blue-500 form-radio" v-model="numericFields.maxBudget" @input="validateNumericField('maxBudget')">
+
+            <label for="category1" class="text-sm text-gray-900 dark:text-black">Maximum Protein</label>
             <input type="number" class="text-blue-500 form-radio" v-model="numericFields.maxServingPrice" @input="validateNumericField('maxServingPrice')">
 
           </div>
@@ -135,21 +103,27 @@
 </template>
 
 <script>
+import checkboxes from "./components/filterCategory.vue"
 import { query, collection, getDocs, where, and, or, addDoc } from "firebase/firestore"
 import db from '../firebase/init.js'
 
 export default {
   data() {
     return {
+      selectedElements: [],
       images: [],
-      allergens: [],
       conditions: [],
       data: [],
-      resultRecipes: [],
-      diff: [],
-      array: [],
-      amenities: [],
-      cuisines: [],
+      totalTimes: [],
+      filterValues: {
+        kidsFriendly: "",
+        cuisines: [],
+        totalTimes: [],
+        numericFields: {
+          maxBudget: '',
+          maxServingPrice: ''
+        }
+      },
       numericFields: {
         maxBudget: '',
         maxServingPrice: ''
@@ -157,9 +131,25 @@ export default {
     }
   },
   methods: {
+    // Takes selected checkboxes' values and add them to the filter condition
+    addSelectedElementsToEqualsCondition(field, elements, value) {
+      elements.forEach(e => {
+        this.addCondition(this.conditions, field + '.' + e, '==', value)
+      })
+    },
+    addSelectedElementsToArrayContainsAnyCondition(field, elements){
+      if(elements.length > 0){
+          this.addCondition(this.conditions, field, 'array-contains-any', elements)
+      }
+    },
+    addSelectedElementsToInCondition(field, elements) {
+      if(elements.length > 0){
+        this.addCondition(this.conditions, field, 'in', elements)
+      }
+    },
     // add conditions to initial filter (remember only 1 inequality is allowed [e.g. ">" or "<="])
     addCondition(conditionsArray, field, operator, value) {
-      conditionsArray.push({ field, operator, value })
+      conditionsArray.push({ field, operator, value }) // Think about whether it's worth to pass conditions array or directly change the this.conditions
     },
 
     // filter incoming recipes based on field (e.g. "totalPrice"), number (e.g. user input), and
@@ -174,18 +164,17 @@ export default {
     async getRecipie() {
 
       this.conditions = []
-      
-      this.allergens.forEach(a => {
-        this.addCondition(this.conditions, 'allergens.' + a, '==', false)
-      })
 
-      this.amenities.forEach(a => {
-        this.addCondition(this.conditions, 'amenities.' + a, '==', false)
-      })
-
-      if(this.cuisines.length > 0){
-        this.addCondition(this.conditions, 'cuisines', 'array-contains-any', this.cuisines)
+      if(this.filterValues.kidsFriendly !== ""){
+        this.addCondition(this.conditions, 'kidsFriendly', '==', this.filterValues.kidsFriendly)
       }
+
+      // Change cuisines to cuisine in the database or filter on the client-side 
+      this.$refs.difficultyComponent.getSelectedElements()
+      this.$refs.servingSizeComponent.getSelectedElements()
+      this.$refs.allergensComponent.getSelectedElements()
+      this.$refs.amenitiesComponent.getSelectedElements()
+      this.$refs.dietsComponent.getSelectedElements()
 
       // Connect to Firebase and apply filters
       let queryConstruct = collection(db, 'recipe')
@@ -217,6 +206,9 @@ export default {
     validateNumericField(fieldName) {
       this.numericFields[fieldName] = this.numericFields[fieldName] === '' || isNaN(this.numericFields[fieldName]) || this.numericFields[fieldName] < 0 ? '' : parseFloat(this.numericFields[fieldName]);
     }
+  },
+  components: {
+    checkboxes
   }
 };
 
