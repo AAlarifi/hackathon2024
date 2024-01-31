@@ -1,6 +1,6 @@
 <template>
   <div class="flex items-center justify-center h-screen ">
-    <form class="w-full ml-10 mr-10 mb-20" @submit.prevent="getRecipie">
+    <form class="w-full ml-10 mr-10 mb-20" @submit.prevent="getRecipe">
       <!-- Search Input -->
       <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-black">Search</label>
       <div class="relative">
@@ -18,28 +18,22 @@
           class="text-black absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
       </div>
       <img v-for="(image, index) in images" :key="index" :src="image" alt="Recipe Image">
-      
+
       <!-- Filter Options -->
       <div class="mt-8">
-        <div>
-          <checkboxes ref="allergensComponent" category="Allergens" :categoryElements="['peanuts', 'fish', 'milk', 'soy', 'wheat', 'sesame', 'mustard', 'eggs']" @getSelectedElements="addSelectedElementsToEqualsCondition('allergens', $event, false)"/>
-        </div>
-
-        <div>
-          <checkboxes ref="amenitiesComponent" category="Amenities" :categoryElements="['oven', 'pan', 'pot', 'bowl', 'blender']" @getSelectedElements="addSelectedElementsToEqualsCondition('amenities', $event, false)"/>
-        </div>
-
-        <div>
-          <checkboxes ref="dietsComponent" category="Diets" :categoryElements="['vegan', 'vegetarian', 'keto', 'gluten-free', 'pescatarian', 'halal']" @getSelectedElements="addSelectedElementsToArrayContainsAnyCondition('diets', $event)"/>
-        </div>
-
-        <div>
-          <checkboxes ref="cuisinesComponent" category="Cuisines" :categoryElements="['Italian', 'Chinese', 'Indian', 'French', 'Mexican', 'Japanese', 'Thai', 'Spanish', 'Greek']"/> <!-- @getSelectedElements="addSelectedElementsToEqualsCondition('cuisine', $event, '==')" -->
-        </div>
-
-        <div>
-          <checkboxes ref="difficultyComponent" category="Difficuly" :categoryElements="['easy', 'medium', 'hard']" @getSelectedElements="addSelectedElementsToInCondition('difficulty', $event)"/>
-        </div>
+        <Checkboxes ref="allergensComponent" category="Allergens" :categoryElements="['peanuts', 'fish', 'milk', 'soy', 'wheat', 'sesame', 'mustard', 'eggs']"
+          @getSelectedElements="addSelectedElementsToEqualsCondition('allergens', $event, false)" />
+        <Checkboxes ref="amenitiesComponent" category="Amenities" :categoryElements="['oven', 'pan', 'pot', 'bowl', 'blender']"
+          @getSelectedElements="addSelectedElementsToEqualsCondition('amenities', $event, false)" />
+        <Checkboxes ref="dietsComponent" category="Diets" :categoryElements="['vegan', 'vegetarian', 'keto', 'gluten-free', 'pescatarian', 'halal']"
+          @getSelectedElements="addSelectedElementsToArrayContainsAnyCondition('diets', $event)" />
+        <Checkboxes ref="cuisinesComponent" category="Cuisines" :categoryElements="['Italian', 'Chinese', 'Indian', 'French', 'Mexican', 'Japanese', 'Thai', 'Spanish', 'Greek']" />
+        <!-- @getSelectedElements="addSelectedElementsToEqualsCondition('cuisine', $event, '==')" -->
+        <Checkboxes ref="difficultyComponent" category="Difficuly" :categoryElements="['easy', 'medium', 'hard']"
+          @getSelectedElements="addSelectedElementsToInCondition('difficulty', $event)" />
+        <Checkboxes ref="servingSizeComponent" category="Serving Size" :categoryElements="[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]"
+          @getSelectedElements="addSelectedElementsToInCondition('servingSize', $event)" />
+        <!-- NEEEED TO DO CUISINES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 
         <div>
           <label for="kidsFriendly">Kids friendly:</label>
@@ -51,14 +45,12 @@
         </div>
 
         <div>
-          <checkboxes ref="servingSizeComponent" category="Serving Size" :categoryElements="[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]" @getSelectedElements="addSelectedElementsToInCondition('servingSize', $event)"/>
-        </div>
-
-        <div>
           <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Filter by Total Time</label>
           <div class="flex space-x-4">
-            <template v-for="totalTime in [{'label': 'Short(<30mins)', 'value': 30}, {'label': 'Medium(<1h15mins)', 'value': 75}, {'label': 'Long(<2h)', 'value': 120}, {'label': 'Extra Long(>2h)', 'value': 121}]">
-              <label :for="`category${totalTime.label}`" class="text-sm text-gray-900 dark:text-black">{{ totalTime.label }}</label>
+            <template
+              v-for="totalTime in [{ 'label': 'Short(<30mins)', 'value': 30 }, { 'label': 'Medium(<1h15mins)', 'value': 75 }, { 'label': 'Long(<2h)', 'value': 120 }, { 'label': 'Extra Long(>2h)', 'value': 121 }]">
+              <label :for="`category${totalTime.label}`" class="text-sm text-gray-900 dark:text-black">{{ totalTime.label
+              }}</label>
               <input type="checkbox" :value="totalTime.value" class="text-blue-500 form-radio" v-model="totalTimes">
             </template>
           </div>
@@ -72,27 +64,24 @@
         <div>
           <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Filter by Pricing</label>
           <div class="flex space-x-4">
-
-            <label for="category1" class="text-sm text-gray-900 dark:text-black">Maximum Budget</label>
-            <input type="number" class="text-blue-500 form-radio" v-model="numericFields.maxBudget" @input="validateNumericField('maxBudget')">
-
-            <label for="category1" class="text-sm text-gray-900 dark:text-black">Maximum Price per Serving</label>
-            <input type="number" class="text-blue-500 form-radio" v-model="numericFields.maxServingPrice" @input="validateNumericField('maxServingPrice')">
-
+            <NumericInput name="Maximum Budget" @getInputNumber="updateNumericValue('numericFields', 'maxBudget', $event)" />
+            <NumericInput name="Maximum Price per Serving" @getInputNumber="updateNumericValue('numericFields', 'maxServingPrice', $event)" />
           </div>
         </div>
 
         <div>
           <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Filter by Nutrition</label>
           <div class="flex space-x-4">
-
-            <!-- Change the v-model and validate numeric field -->
-            <label for="category1" class="text-sm text-gray-900 dark:text-black">Minimum Protein</label>
-            <input type="number" class="text-blue-500 form-radio" v-model="numericFields.maxBudget" @input="validateNumericField('maxBudget')">
-
-            <label for="category1" class="text-sm text-gray-900 dark:text-black">Maximum Protein</label>
-            <input type="number" class="text-blue-500 form-radio" v-model="numericFields.maxServingPrice" @input="validateNumericField('maxServingPrice')">
-
+            <NumericInput name="Minimum Protein" @getInputNumber="updateNumericValue('nutrition', 'minProtein', $event)" />
+            <NumericInput name="Maximum Protein" @getInputNumber="updateNumericValue('nutrition', 'maxProtein', $event)" />
+          </div>
+          <div class="flex space-x-4">
+            <NumericInput name="Minimum Carbohydrates" @getInputNumber="updateNumericValue('nutrition', 'minCarbs', $event)" />
+            <NumericInput name="Maximum Carbohydrates" @getInputNumber="updateNumericValue('nutrition', 'maxCarbs', $event)" />
+          </div>
+          <div class="flex space-x-4">
+            <NumericInput name="Minimum Fat" @getInputNumber="updateNumericValue('nutrition', 'minFat', $event)" />
+            <NumericInput name="Maximum Fat" @getInputNumber="updateNumericValue('nutrition', 'maxFat', $event)" />
           </div>
         </div>
       </div>
@@ -103,7 +92,8 @@
 </template>
 
 <script>
-import checkboxes from "./components/filterCategory.vue"
+import Checkboxes from "./components/CheckboxFilterCategory.vue"
+import NumericInput from "./components/NumericFilterCategory.vue"
 import { query, collection, getDocs, where, and, or, addDoc } from "firebase/firestore"
 import db from '../firebase/init.js'
 
@@ -122,54 +112,28 @@ export default {
         numericFields: {
           maxBudget: '',
           maxServingPrice: ''
+        },
+        nutrition: {
+          minProtein: '',
+          maxProtein: '',
+          minCarbs: '',
+          maxCarbs: '',
+          minFat: '',
+          maxFat: '',
         }
       },
-      numericFields: {
-        maxBudget: '',
-        maxServingPrice: ''
-      }
     }
   },
   methods: {
-    // Takes selected checkboxes' values and add them to the filter condition
-    addSelectedElementsToEqualsCondition(field, elements, value) {
-      elements.forEach(e => {
-        this.addCondition(this.conditions, field + '.' + e, '==', value)
-      })
-    },
-    addSelectedElementsToArrayContainsAnyCondition(field, elements){
-      if(elements.length > 0){
-          this.addCondition(this.conditions, field, 'array-contains-any', elements)
-      }
-    },
-    addSelectedElementsToInCondition(field, elements) {
-      if(elements.length > 0){
-        this.addCondition(this.conditions, field, 'in', elements)
-      }
-    },
-    // add conditions to initial filter (remember only 1 inequality is allowed [e.g. ">" or "<="])
-    addCondition(conditionsArray, field, operator, value) {
-      conditionsArray.push({ field, operator, value }) // Think about whether it's worth to pass conditions array or directly change the this.conditions
-    },
-
-    // filter incoming recipes based on field (e.g. "totalPrice"), number (e.g. user input), and
-    // morethan (true if you want the results be more than/equal to; false if you want the results be less than/equal)
-    filterNumber(field, number, morethan) {
-      return this.data.filter(recipe => {
-        const fieldValue = recipe.data()[field];
-        return morethan ? fieldValue >= number : fieldValue <= number;
-      });
-    },
-
-    async getRecipie() {
+    async getRecipe() {
 
       this.conditions = []
 
-      if(this.filterValues.kidsFriendly !== ""){
+      if (this.filterValues.kidsFriendly !== "") {
         this.addCondition(this.conditions, 'kidsFriendly', '==', this.filterValues.kidsFriendly)
       }
 
-      // Change cuisines to cuisine in the database or filter on the client-side 
+      // Change cuisines to cuisine in the database or filter on the client-side !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       this.$refs.difficultyComponent.getSelectedElements()
       this.$refs.servingSizeComponent.getSelectedElements()
       this.$refs.allergensComponent.getSelectedElements()
@@ -189,13 +153,14 @@ export default {
       console.log("Results")
 
       // Filter on the client-side (filter based on inequalities)
-      if(this.numericFields.maxBudget > 0) {
-        this.data = this.filterNumber("totalPrice", this.numericFields.maxBudget, false)
-      }
-      
-      if(this.numericFields.maxServingPrice > 0) {
-        this.data = this.filterNumber("servingPrice", this.numericFields.maxServingPrice, false)
-      }
+      this.data = this.filterNumber("totalPrice", this.filterValues.numericFields.maxBudget, false)
+      this.data = this.filterNumber("servingPrice", this.filterValues.numericFields.maxServingPrice, false)
+      this.data = this.filterArrayOfNumbers("nutrition", "protein", this.filterValues.nutrition.minProtein, true)
+      this.data = this.filterArrayOfNumbers("nutrition", "protein", this.filterValues.nutrition.maxProtein, false)
+      this.data = this.filterArrayOfNumbers("nutrition", "carbs", this.filterValues.nutrition.minCarbs, true)
+      this.data = this.filterArrayOfNumbers("nutrition", "carbs", this.filterValues.nutrition.maxCarbs, false)
+      this.data = this.filterArrayOfNumbers("nutrition", "fats", this.filterValues.nutrition.minFat, true)
+      this.data = this.filterArrayOfNumbers("nutrition", "fats", this.filterValues.nutrition.maxFat, false)
 
       // Print out the results
       this.data.forEach(recipe => {
@@ -203,15 +168,60 @@ export default {
       })
     },
     
-    validateNumericField(fieldName) {
-      this.numericFields[fieldName] = this.numericFields[fieldName] === '' || isNaN(this.numericFields[fieldName]) || this.numericFields[fieldName] < 0 ? '' : parseFloat(this.numericFields[fieldName]);
+    // Takes selected checkboxes' values and add them to the filter condition
+    addSelectedElementsToEqualsCondition(field, elements, value) {
+      elements.forEach(e => {
+        this.addCondition(this.conditions, field + '.' + e, '==', value)
+      })
+    },
+    addSelectedElementsToArrayContainsAnyCondition(field, elements) {
+      if (elements.length > 0) {
+        this.addCondition(this.conditions, field, 'array-contains-any', elements)
+      }
+    },
+    addSelectedElementsToInCondition(field, elements) {
+      if (elements.length > 0) {
+        this.addCondition(this.conditions, field, 'in', elements)
+      }
+    },
+    // add conditions to initial filter (remember only 1 inequality is allowed [e.g. ">" or "<="])
+    addCondition(conditionsArray, field, operator, value) {
+      conditionsArray.push({ field, operator, value }) // Think about whether it's worth to pass conditions array or directly change the this.conditions
+    },
+
+    // filter incoming recipes based on field (e.g. "totalPrice"), number (e.g. user input), and
+    // morethan (true if you want the results be more than/equal to; false if you want the results be less than/equal)
+    filterNumber(field, value, morethan) {
+      if (value > 0) {
+        return this.data.filter(recipe => {
+          const fieldValue = recipe.data()[field];
+          console.log(recipe.data()[field])
+          return morethan ? fieldValue >= value : fieldValue <= value;
+        });
+      } else {
+        return this.data;
+      }
+    },
+    filterArrayOfNumbers(arrayName, fieldName, value, morethan) {
+      if (value > 0) {
+        return this.data.filter(recipe => {
+          if (recipe.data()[arrayName]) {
+            const fieldValue = recipe.data()[arrayName][fieldName];
+            return morethan ? fieldValue >= value : fieldValue <= value;
+          }
+        });
+      } else {
+        return this.data;
+      }
+    },
+
+    updateNumericValue(category, key, value) {
+      this.filterValues[category][key] = value === '' || isNaN(value) || value < 0 ? '' : parseFloat(value);
     }
   },
   components: {
-    checkboxes
+    Checkboxes,
+    NumericInput
   }
 };
-
-
-
 </script>
