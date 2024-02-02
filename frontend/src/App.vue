@@ -1,30 +1,22 @@
 <template>
-  
-  
-   <div>
-
-    <NavBar/>
-    <DarkMode/>
-
+  <div>
+    <NavBar />
+    <DarkMode />
   </div>
-  <RouterView/>
-    <!-- <router-link to="/translate">translate page</router-link> -->
+  <RouterView />
+  <!-- <router-link to="/translate">translate page</router-link> -->
 </template>
 
 <script>
-import { createRouter, createWebHistory } from 'vue-router';
-import NavBar from "./layouts/NavigationBar.vue"
-import DarkMode from "./views/DarkMode.vue"
-import router from "./router/index.js";
-// require('dotenv').config();
+import NavBar from './layouts/NavigationBar.vue';
+import DarkMode from './views/DarkMode.vue';
 
 export default {
-  
-  components:{
-        NavBar,
-        DarkMode
-      }
-}
+  components: {
+    NavBar,
+    DarkMode,
+  },
+};
 
 // import NavBar from "./layouts/NavigationBar.vue"
 

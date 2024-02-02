@@ -1,16 +1,21 @@
 <template>
-  <div :style="{ fontFamily: fontFamily }" class="flex flex-col items-center justify-center ">
-    <button @click="toggleDarkMode" class="border mb-2 ">Toggle Dark Mode</button>
-    <button @click="toggleColourBlindMode" class="border mb-2">Toggle Color Blind Mode</button>
-    <button @click="toggleFontStyle" class="border mb-2">Toggle Font</button>
+  <div :style="{ fontFamily: fontFamily }"
+        class="flex flex-col items-center justify-center ">
+    <button @click="toggleDarkMode"
+            class="border mb-2 ">Toggle Dark Mode</button>
+    <button @click="toggleColourBlindMode"
+            class="border mb-2">Toggle Color Blind Mode</button>
+    <button @click="toggleFontStyle"
+            class="border mb-2">Toggle Font</button>
   </div>
 </template>
 
 <script>
-import viewModeService from '../services/darkMode.service.js'
+import viewModeService from '../services/darkMode.service.js';
 import '../assets/accessabilityMode.css';
 // import FontToggleButton from '../components/FontToggle.vue';
-import { toggleFontStyle, getCurrentFontStyle } from '../services/fontManager.service';
+import {toggleFontStyle, getCurrentFontStyle}
+  from '../services/fontManager.service';
 export default {
   data() {
     return {
@@ -21,7 +26,7 @@ export default {
   computed: {
     fontFamily() {
       return getCurrentFontStyle();
-  }},
+    }},
   methods: {
     toggleDarkMode() {
       this.isDarkModeEnabled = !this.isDarkModeEnabled;
@@ -34,8 +39,12 @@ export default {
       this.updateBodyClass();
     },
     updateBodyClass() {
-      document.body.classList.toggle('dark-mode', this.isDarkModeEnabled);
-      document.body.classList.toggle('color-blind-mode', this.isColorBlindModeEnabled);
+      document.body.classList.toggle(
+          'dark-mode',
+          this.isDarkModeEnabled);
+      document.body.classList.toggle(
+          'color-blind-mode',
+          this.isColorBlindModeEnabled);
     },
     toggleFontStyle() {
       toggleFontStyle();

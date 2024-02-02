@@ -14,7 +14,6 @@ export function filterNumber(data, field, value, morethan) {
   if (value > 0) {
     return data.filter((recipe) => {
       const fieldValue = recipe.data()[field];
-      console.log(recipe.data()[field]);
       return morethan ? fieldValue >= value : fieldValue <= value;
     });
   } else {

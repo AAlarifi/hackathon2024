@@ -163,7 +163,7 @@ export default {
       this.conditions = [];
 
       if (this.filterValues.kidsFriendly !== '') {
-        this.addCondition(this.conditions, 'kidsFriendly',
+        this.addCondition('kidsFriendly',
             '==', this.filterValues.kidsFriendly);
       }
 
@@ -213,25 +213,22 @@ export default {
     // Takes selected checkboxes' values and add them to the filter condition
     addSelectedElementsToEqualsCondition(field, elements, value) {
       elements.forEach((e) => {
-        this.addCondition(this.conditions, field + '.' + e, '==', value);
+        this.addCondition(field + '.' + e, '==', value);
       });
     },
     addSelectedElementsToArrayContainsAnyCondition(field, elements) {
       if (elements.length > 0) {
-        this.addCondition(this.conditions,
-            field, 'array-contains-any', elements);
+        this.addCondition(field, 'array-contains-any', elements);
       }
     },
     addSelectedElementsToInCondition(field, elements) {
       if (elements.length > 0) {
-        this.addCondition(this.conditions, field, 'in', elements);
+        this.addCondition(field, 'in', elements);
       }
     },
     // add condition to FB filter (only 1 inequality is allowed e.g.">" or "<=")
-    addCondition(conditionsArray, field, operator, value) {
-      conditionsArray.push({field, operator, value});
-      // Think about whether it's worth to pass conditions
-      // array or directly change the this.conditions
+    addCondition(field, operator, value) {
+      this.conditions.push({field, operator, value});
     },
     updateNumericValue(category, key, value) {
       this.filterValues[category][key] = value === '' ||
