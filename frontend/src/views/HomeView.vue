@@ -79,7 +79,7 @@
               <input type="checkbox"
                 :value="totalTime.value"
                 class="text-blue-500 form-radio"
-                v-model="totalTimes">
+                v-model="filterValues.totalTimes">
             </template>
           </div>
         </div>
@@ -127,18 +127,17 @@
 <script>
 import Checkboxes from './components/CheckboxFilterCategory.vue';
 import NumericInput from './components/NumericFilterCategory.vue';
-import {filterNumber, filterArrayOfNumbers} from '../services/filters';
-import {query, collection, getDocs, where} from 'firebase/firestore';
-import db from '../firebase/init.js';
+import {useFilterConditions} from '../stores/FilterConditions';
+// import {ref} from 'vue';
 
 export default {
   data() {
     return {
+      conditionsStore: 'ref(null)',
       selectedElements: [],
       images: [],
       conditions: [],
       data: [],
-      totalTimes: [],
       filterValues: {
         kidsFriendly: '',
         cuisines: [],
@@ -158,6 +157,9 @@ export default {
       },
     };
   },
+  created() {
+    this.conditionsStore = useFilterConditions();
+  },
   methods: {
     async getRecipe() {
       this.conditions = [];
@@ -174,41 +176,9 @@ export default {
       this.$refs.amenitiesComponent.getSelectedElements();
       this.$refs.dietsComponent.getSelectedElements();
 
-      // Connect to Firebase and apply filters
-      let queryConstruct = collection(db, 'recipe');
-      this.conditions.forEach((condition) => {
-        queryConstruct = query(queryConstruct,
-            where(condition.field, condition.operator, condition.value));
-      });
+      this.conditionsStore.replaceFilterConditions(this.conditions);
 
-      // Retrieve data and assign it to this.data
-      const q = await getDocs(queryConstruct);
-      this.data = q.docs;
-
-      console.log('Results');
-
-      // Filter on the client-side (filter based on inequalities)
-      this.data = filterNumber(this.data, 'totalPrice',
-          this.filterValues.numericFields.maxBudget, false);
-      this.data = filterNumber(this.data, 'servingPrice',
-          this.filterValues.numericFields.maxServingPrice, false);
-      this.data = filterArrayOfNumbers(this.data, 'nutrition', 'protein',
-          this.filterValues.nutrition.minProtein, true);
-      this.data = filterArrayOfNumbers(this.data, 'nutrition', 'protein',
-          this.filterValues.nutrition.maxProtein, false);
-      this.data = filterArrayOfNumbers(this.data, 'nutrition', 'carbs',
-          this.filterValues.nutrition.minCarbs, true);
-      this.data = filterArrayOfNumbers(this.data, 'nutrition', 'carbs',
-          this.filterValues.nutrition.maxCarbs, false);
-      this.data = filterArrayOfNumbers(this.data, 'nutrition', 'fats',
-          this.filterValues.nutrition.minFat, true);
-      this.data = filterArrayOfNumbers(this.data, 'nutrition', 'fats',
-          this.filterValues.nutrition.maxFat, false);
-
-      // Print out the results
-      this.data.forEach((recipe) => {
-        console.log(recipe.data());
-      });
+      this.$router.push({name: 'searchResults'});
     },
     // Takes selected checkboxes' values and add them to the filter condition
     addSelectedElementsToEqualsCondition(field, elements, value) {
@@ -231,8 +201,9 @@ export default {
       this.conditions.push({field, operator, value});
     },
     updateNumericValue(category, key, value) {
-      this.filterValues[category][key] = value === '' ||
-          isNaN(value) || value < 0 ? '' : parseFloat(value);
+      // this.filterValues[category][key] = value === '' ||
+      //     isNaN(value) || value < 0 ? '' : parseFloat(value);
+      this.conditionsStore.filterValues[category][key] = value;
     },
   },
   components: {

@@ -4,7 +4,8 @@
     <div class="container mx-auto flex flex-wrap
                 p-8 flex-col md:flex-row items-center">
       <a class="flex title-font font-medium items-center
-                text-gray-900 mb-4 md:mb-0">
+                text-gray-900 mb-4 md:mb-0"
+          href="/">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -100,8 +101,10 @@ export default {
       this.isProfileDropdownOpen = !this.isProfileDropdownOpen;
     },
     closeProfileDropdown(event) {
-      const isMouseOverButton = this.$refs.profileButton.contains(event.relatedTarget);
-      const isMouseOverDropdown = this.$refs.profileDropdown.contains(event.relatedTarget);
+      const isMouseOverButton =
+            this.$refs.profileButton.contains(event.relatedTarget);
+      const isMouseOverDropdown =
+            this.$refs.profileDropdown.contains(event.relatedTarget);
       if (!isMouseOverButton && !isMouseOverDropdown) {
         this.isProfileDropdownOpen = false;
       }
